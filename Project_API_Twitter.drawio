@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-02-01T13:48:55.675Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="YSXXNBDqZXlzdbHXdwNw" version="23.1.0" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2024-02-01T13:54:09.005Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="5p2ljR7WcEQESXC5vHqW" version="23.1.0" type="github" pages="4">
   <diagram name="Context" id="izjktVpvM4s8sL_e7r8T">
     <mxGraphModel dx="1196" dy="674" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -15,7 +15,7 @@
           </mxCell>
         </object>
         <object placeholders="1" c4Name="Twitter" c4Type="Application Web" c4Description="Twitter est une app web de médias sociaux permettant aux utilisateurs de partager des messages.&#xa;" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;font&gt;%c4Description%&lt;/font&gt;&lt;/font&gt;&lt;/div&gt;" id="boTqifhsY9taiCHySPUr-7">
-          <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#1ba1e2;fontColor=#000000;align=center;arcSize=0;strokeColor=#006EAF;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1" parent="1">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#1ba1e2;fontColor=#FFFFFF;align=center;arcSize=0;strokeColor=#006EAF;metaEdit=1;resizable=0;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" vertex="1" parent="1">
             <mxGeometry x="360" y="370" width="240" height="120" as="geometry" />
           </mxCell>
         </object>
