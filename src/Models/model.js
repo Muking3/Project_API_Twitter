@@ -38,4 +38,4 @@ export const tweets = [
         "repost": 30
     }]
 
-export const users = [{ userId: 1 }, { userId: 2 }]
+export const users = [{ userId: 1, id: 2 }, { userId: 2, id: 1 }]

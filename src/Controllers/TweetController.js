@@ -36,9 +36,10 @@ export const postTweet = (req, res) => {
 
 export const patchTweet = (req, res) => {
     const newTweets = tweets.find((tweet) => req.body.id == tweet.id)
-    const userid = users.find((user) => req.body.userId == user.userId)
-    const index = users.indexOf(userid)
-    if (!userid) {
+    const user = users.find(user => req.body.userId == user.userId && req.body.id == user.id)
+    console.log(user);
+    const index = users.indexOf(user)
+    if (!user) {
         newTweets.like += 1
         users.push({ userId: req.body.userId })
         return res.send("yes patch +1")
@@ -48,25 +49,9 @@ export const patchTweet = (req, res) => {
     return res.send("yes patch -1")
 }
 
-export const putTweet = (req, res) => {
-    const newTweets = tweets.find((tweet) => req.params.id == tweet.id)
-    const index = tweets.indexOf(newTweets)
-    const tweetBody = req.body.body.trim()
-    if (tweetBody.length !== 0) {
-        const newTweet = {
-            userId: newTweets.userId,
-            id: parseInt(req.params.id),
-            body: tweetBody,
-        }
-        tweets[index] = newTweet
-        return res.send("yes put")
-    }
-    res.send("no post")
-}
-
 export const deleteTweet = (req, res) => {
-    if (req.body.text.length !== 0) {
-        return res.send("yes delete")
-    }
-    res.send("no delete")
+    const newTweets = tweets.find((tweet) => req.body.id == tweet.id)
+    const index = tweets.indexOf(newTweets)
+    tweets.splice(index, 1)
+    return res.send("yes delete")
 }
