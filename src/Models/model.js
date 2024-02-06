@@ -37,3 +37,5 @@ export const tweets = [
         "like": 912,
         "repost": 30
     }]
+
+export const users = [{ userId: 1 }, { userId: 2 }]
