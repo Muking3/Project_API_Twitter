@@ -25,7 +25,7 @@ export const postTweet = (req, res) => {
             id: uuidv4(),
             title: "Twitter_API",
             body: tweetBody,
-            url: "http://localhost:3000/" + req.file.filename,
+            url: "http://localhost:8000/" + req.file.filename,
             like: 0,
             repost: 0
         }
@@ -38,11 +38,16 @@ export const postTweet = (req, res) => {
 export const patchTweet = (req, res) => {
     const newTweets = tweets.find((tweet) => req.body.id == tweet.id)
     const user = users.find(user => req.body.userId == user.userId && req.body.id == user.id)
-    console.log(user);
+    console.log(newTweets);
+
     const index = users.indexOf(user)
     if (!user) {
         newTweets.like += 1
-        users.push({ userId: req.body.userId })
+        users.push({
+            userId: req.body.userId,
+            id: req.body.id
+        })
+        console.log(users);
         return res.send("yes patch +1")
     }
     newTweets.like -= 1
