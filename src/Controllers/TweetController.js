@@ -17,14 +17,15 @@ export const getTweet = (req, res) => {
 
 export const postTweet = (req, res) => {
     const tweetBody = req.body.body.trim()
+    console.log(req);
+    console.log(req.file);
     if (tweetBody.length !== 0) {
         const newTweet = {
             userId: 3,
             id: uuidv4(),
             title: "Twitter_API",
             body: tweetBody,
-            url: "https://via.placeholder.com/600/d32776",
-            thumbnailUrl: "https://via.placeholder.com/150/d32776",
+            url: "http://localhost:3000/" + req.file.filename,
             like: 0,
             repost: 0
         }
