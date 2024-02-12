@@ -1,15 +1,18 @@
 import express from "express"
-import { getAlluser, postuser } from "../Controllers/UserController.js"
-import { validate } from "../Middlewar/UserValidation.js"
+import { getAllUser, postUser, getUser, postAuth, getProfile } from "../Controllers/UserController.js";
+import { validate } from "../Middlewar/UserValidation.js";
+import "../Middlewar/UserValidation.js";
+import passport from "passport";
 
-export const user = express.Router()
+export const user = express.Router();
 
-user.get("", getAlluser)
+user.get("", getAllUser);
 
-// user.get("/:id", getuser)
+user.get('/profile', passport.authenticate('jwt', { session: false }), getProfile);
 
-user.post("", validate, postuser)
+user.get("/:id", getUser);
 
-// user.patch("", patchuser)
+user.post("", validate, postUser);
 
-// user.delete("", deleteuser)
+user.post('/authenticate', postAuth)
+
