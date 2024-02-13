@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import crypt from "bcryptjs";
 import { Users } from '../Models/model.js';
-import { authenticateUser } from '../Middlewar/UserValidation.js';
+import { authenticateUser } from '../Middlewares/AuthUser.js';
 
 export const getAllUser = (req, res) => {
     return res.status(200).json(Users);
@@ -16,11 +16,11 @@ export const postUser = (req, res) => {
     const user = req.body;
     const _id = uuidv4();
     res.status(201).json({ message: 'Utilisateur créé avec succès', user });
-    crypt.hash(req.body.password, 10).then(Hash => {
+    crypt.hash(req.body.password, 10).then(hash => {
         const newUser = {
             _id: _id,
             email: req.body.email,
-            password: Hash
+            password: hash
         }
         Users.push(newUser);
     })
@@ -36,6 +36,6 @@ export const postAuth = async (req, res) => {
 }
 
 export const getProfile = (req, res) => {
-    res.json({ user: req.user });
+    res.json({ _id: req.user });
 }
 

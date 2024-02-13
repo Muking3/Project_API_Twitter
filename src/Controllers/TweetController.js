@@ -3,22 +3,19 @@ import { tweets, users } from '../Models/model.js';
 
 export const getAllTweet = (req, res) => {
     if (req.query.userId) {
-        const newTweets = tweets.filter((tweet) => req.query.userId == tweet.userId)
-        return res.status(200).json(newTweets)
+        const newTweets = tweets.filter((tweet) => req.query.userId == tweet.userId);
+        return res.status(200).json(newTweets);
     }
-    res.status(200).json(tweets)
+    res.status(200).json(tweets);
 }
 
 export const getTweet = (req, res) => {
-    console.log(req.params.id);
-    const newTweets = tweets.filter((tweet) => req.params.id == tweet.id)
-    res.status(200).json(newTweets)
+    const newTweets = tweets.filter((tweet) => req.params.id == tweet.id);
+    res.status(200).json(newTweets);
 }
 
 export const postTweet = (req, res) => {
-    const tweetBody = req.body.body.trim()
-    console.log(req);
-    console.log(req.file);
+    const tweetBody = req.body.body.trim();
     if (tweetBody.length !== 0) {
         const newTweet = {
             userId: 3,
@@ -28,36 +25,33 @@ export const postTweet = (req, res) => {
             url: "http://localhost:8000/" + req.file.filename,
             like: 0,
             repost: 0
-        }
-        tweets.push(newTweet)
-        return res.send("yes post")
+        };
+        tweets.push(newTweet);
+        return res.send("yes post");
     }
-    res.send("no post")
+    res.send("no post");
 }
 
 export const patchTweet = (req, res) => {
-    const newTweets = tweets.find((tweet) => req.body.id == tweet.id)
-    const user = users.find(user => req.body.userId == user.userId && req.body.id == user.id)
-    console.log(newTweets);
-
-    const index = users.indexOf(user)
+    const newTweets = tweets.find((tweet) => req.body.id == tweet.id);
+    const user = users.find(user => req.body.userId == user.userId && req.body.id == user.id);
+    const index = users.indexOf(user);
     if (!user) {
         newTweets.like += 1
         users.push({
             userId: req.body.userId,
             id: req.body.id
-        })
-        console.log(users);
-        return res.send("yes patch +1")
+        });
+        return res.send("yes patch +1");
     }
-    newTweets.like -= 1
-    users.splice(index, 1)
-    return res.send("yes patch -1")
+    newTweets.like -= 1;
+    users.splice(index, 1);
+    return res.send("yes patch -1");
 }
 
 export const deleteTweet = (req, res) => {
-    const newTweets = tweets.find((tweet) => req.body.id == tweet.id)
-    const index = tweets.indexOf(newTweets)
-    tweets.splice(index, 1)
-    return res.send("yes delete")
+    const newTweets = tweets.find((tweet) => req.body.id == tweet.id);
+    const index = tweets.indexOf(newTweets);
+    tweets.splice(index, 1);
+    return res.send("yes delete");
 }

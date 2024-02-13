@@ -4,10 +4,8 @@ import { tweet } from "./src/Routes/TweetRoute.js";
 import path from "path";
 import { fileURLToPath } from 'url';
 import { user } from "./src/Routes/UserRoute.js";
-import passport, { Passport } from "passport";
-import session from "express-session";
-import passportLocal from "passport-local";
-import { jwtStrategy } from './src/Middlewar/UserValidation.js';
+import passport from "passport";
+import { jwtStrategy } from './src/Middlewares/TokenValidation.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -16,7 +14,6 @@ app.use(passport.initialize());
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 app.use(express.static(path.join(__dirname, "images")));
 app.use("/twitter/post", tweet);
 app.use("/twitter/user", user);
