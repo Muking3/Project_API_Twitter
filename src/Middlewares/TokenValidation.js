@@ -11,6 +11,6 @@ export const jwtStrategy = new Strategy(passportOptions, (jwtPayload, done) => {
     const user = Users.find(user => user._id == _id);
     if (!user) {
         done(new Error('User not found'), null);
-    }
+    };
     done(null, user._id);
 });
