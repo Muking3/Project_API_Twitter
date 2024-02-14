@@ -18,9 +18,7 @@ export const postTweet = (req, res) => {
     const tweetBody = req.body.body.trim();
     if (tweetBody.length !== 0) {
         const newTweet = {
-            userId: 3,
             id: uuidv4(),
-            title: "Twitter_API",
             body: tweetBody,
             url: "http://localhost:8000/" + req.file.filename,
             like: 0,
