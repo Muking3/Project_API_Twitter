@@ -1,15 +1,18 @@
-import express from "express"
-import { deleteTweet, getAllTweet, getTweet, postTweet, patchTweet } from "../Controllers/TweetController.js"
-import { upload } from "../Controllers/multer.js"
-export const tweet = express.Router()
+import express from "express";
+import { deleteTweet, getAllTweet, getTweet, postTweet, patchTweet } from "../Controllers/TweetController.js";
+import { upload } from "../Middlewares/ImgValidation.js";
+import passport from "passport";
+export const tweet = express.Router();
 
-tweet.get("", getAllTweet)
+tweet.use(passport.authenticate('jwt', { session: false }));
 
-tweet.get("/:id", getTweet)
+tweet.get("", getAllTweet);
 
-tweet.post("", upload, postTweet)
+tweet.get("/:id", getTweet);
 
-tweet.patch("", patchTweet)
+tweet.post("", upload, postTweet);
 
-tweet.delete("", deleteTweet)
+tweet.patch("", patchTweet);
+
+tweet.delete("", deleteTweet);
 
