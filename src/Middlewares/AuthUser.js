@@ -1,9 +1,14 @@
-import { Users } from "../Models/model.js";
 import crypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { PrismaClient } from '@prisma/client';
 
+const prisma = new PrismaClient();
 export const authenticateUser = async (email, password) => {
-    const user = Users.find(user => user.email == email)
+    const user = await prisma.user.findUnique({
+        where: {
+            email: email
+        }
+    });
     if (!email || !password) {
         return null;
     }
@@ -11,7 +16,7 @@ export const authenticateUser = async (email, password) => {
         const token = jwt.sign(
             {
                 exp: Math.floor(Date.now() / 1000) + (60 * 60),
-                _id: user._id
+                id: user.id
             },
             `${process.env.JWT_KEY}`
         )
