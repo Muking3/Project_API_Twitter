@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,10 +8,11 @@ datasource db {
 }
 
 model Post {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   content   String?  @db.VarChar(250)
+  url       String?
   published Boolean  @default(false)
   author    User     @relation(fields: [authorId], references: [id])
   authorId  String
@@ -32,9 +30,9 @@ model User {
 
 model Like {
   post       Post     @relation(fields: [postId], references: [id])
-  postId     Int // relation scalar field (used in the `@relation` attribute above)
+  postId     String
   author     User     @relation(fields: [authorId], references: [id])
-  authorId   String // relation scalar field (used in the `@relation` attribute above)
+  authorId   String
   assignedAt DateTime @default(now())
   assignedBy String
 

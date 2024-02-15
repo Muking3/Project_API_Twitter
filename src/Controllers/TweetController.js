@@ -1,33 +1,42 @@
-import { v4 as uuidv4 } from 'uuid';
 import { tweets, users } from '../Models/model.js';
+import { PrismaClient } from '@prisma/client';
 
-export const getAllTweet = (req, res) => {
-    if (req.query.userId) {
-        const newTweets = tweets.filter((tweet) => req.query.userId == tweet.userId);
-        return res.status(200).json(newTweets);
+const prisma = new PrismaClient();
+
+export const getAllTweet = async (req, res) => {
+    if (req.query.authorId) {
+        const TweetUser = await prisma.post.findMany({
+            where: {
+                authorId: req.query.authorId
+            }
+        });
+        return res.status(200).json(TweetUser);
     }
-    res.status(200).json(tweets);
+    const TweetUser = await prisma.post.findMany();
+    res.status(200).json(TweetUser);
 }
 
-export const getTweet = (req, res) => {
-    const newTweets = tweets.filter((tweet) => req.params.id == tweet.id);
-    res.status(200).json(newTweets);
+export const getTweet = async (req, res) => {
+    const tweet = await prisma.post.findUnique({
+        where: {
+            id: req.params.id
+        }
+    });
+    res.status(200).json(tweet);
 }
 
-export const postTweet = (req, res) => {
-    const tweetBody = req.body.body.trim();
-    if (tweetBody.length !== 0) {
-        const newTweet = {
-            id: uuidv4(),
-            body: tweetBody,
-            url: "http://localhost:8000/" + req.file.filename,
-            like: 0,
-            repost: 0
-        };
-        tweets.push(newTweet);
-        return res.send("yes post");
-    }
-    res.send("no post");
+export const postTweet = async (req, res) => {
+    const tweetBody = req.body.content.trim();
+    if (tweetBody.length > 255)
+        return res.send("nombre de text superiere a 255");
+    const post = await prisma.post.create({
+        data: {
+            content: tweetBody,
+            url: `http://localhost:${process.env.PORT}/${req.file.filename}`,
+            authorId: req.user,
+        },
+    });
+    res.send("yes post");
 }
 
 export const patchTweet = (req, res) => {

@@ -7,7 +7,7 @@ const passportOptions = {
     secretOrKey: process.env.JWT_KEY
 };
 
-export const jwtStrategy = new Strategy(passportOptions, async(jwtPayload, done) => {
+export const jwtStrategy = new Strategy(passportOptions, async (jwtPayload, done) => {
     const id = jwtPayload.id;
     const user = await prisma.user.findUnique({
         where: {
