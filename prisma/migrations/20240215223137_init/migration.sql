@@ -1,9 +1,10 @@
 -- CreateTable
 CREATE TABLE "Post" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "content" VARCHAR(250),
+    "url" TEXT,
     "published" BOOLEAN NOT NULL DEFAULT false,
     "authorId" TEXT NOT NULL,
 
@@ -22,7 +23,7 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "Like" (
-    "postId" INTEGER NOT NULL,
+    "postId" TEXT NOT NULL,
     "authorId" TEXT NOT NULL,
     "assignedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "assignedBy" TEXT NOT NULL,

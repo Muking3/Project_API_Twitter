@@ -1,15 +1,19 @@
 import crypt from "bcryptjs";
-import { Users } from '../Models/model.js';
 import { authenticateUser } from '../Middlewares/AuthUser.js';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
-export const getAllUser = (req, res) => {
-    return res.status(200).json(Users);
+export const getAllUser = async (req, res) => {
+    const users = await prisma.user.findMany();
+    return res.status(200).json(users);
 }
 
-export const getUser = (req, res) => {
-    const user = Users.filter((user) => req.params.id == user.userId);
+export const getUser = async (req, res) => {
+    const user = await prisma.user.findUnique({
+        where: {
+            id: req.params.id
+        }
+    });
     res.status(200).json(user);
 }
 
@@ -19,9 +23,9 @@ export const postUser = async (req, res) => {
             email: req.body.email
         }
     });
-    console.log(exist);
-    if (exist)
-        return res.send("L'email existe deja, connectez-vous")
+    if (exist) {
+        return res.send(false)
+    }
     const hash = await crypt.hash(req.body.password, 10)
     await prisma.user.create({
         data: {
@@ -29,8 +33,8 @@ export const postUser = async (req, res) => {
             email: req.body.email,
             password: hash
         },
-    })
-    res.send("User created")
+    });
+    res.send(true);
 }
 
 export const postAuth = async (req, res) => {
@@ -44,5 +48,5 @@ export const postAuth = async (req, res) => {
 
 export const getProfile = (req, res) => {
     res.json({ id: req.user });
-}
+};
 
