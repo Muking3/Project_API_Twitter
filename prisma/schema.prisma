@@ -29,12 +29,12 @@ model User {
 }
 
 model Like {
-  post       Post     @relation(fields: [postId], references: [id])
-  postId     String
-  author     User     @relation(fields: [authorId], references: [id])
-  authorId   String
-  assignedAt DateTime @default(now())
-  assignedBy String
+  post     Post   @relation(fields: [postId], references: [id])
+  postId   String
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId String
+  // assignedAt DateTime @default(now())
+  // assignedBy String
 
   @@id([postId, authorId])
 }

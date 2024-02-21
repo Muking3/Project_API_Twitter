@@ -9,6 +9,10 @@ user.post("", AccountVerify, postUser);
 
 user.post('/authenticate', postAuth);
 
+user.get("", (req, res) => { 
+    res.send('hello')
+})
+
 user.use(passport.authenticate('jwt', { session: false }));
 
 user.get("", getAllUser);

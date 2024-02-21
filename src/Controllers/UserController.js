@@ -11,7 +11,7 @@ export const getAllUser = async (req, res) => {
 export const getUser = async (req, res) => {
     const user = await prisma.user.findUnique({
         where: {
-            id: req.params.id 
+            id: req.params.id
         }
     });
     res.status(200).json(user);
@@ -23,8 +23,9 @@ export const postUser = async (req, res) => {
             email: req.body.email
         }
     });
-    if (exist)
-        return res.send("L'email existe deja, connectez-vous")
+    if (exist) {
+        return res.send(false)
+    }
     const hash = await crypt.hash(req.body.password, 10)
     await prisma.user.create({
         data: {
@@ -33,7 +34,7 @@ export const postUser = async (req, res) => {
             password: hash
         },
     });
-    res.send("User created");
+    res.send(true);
 }
 
 export const postAuth = async (req, res) => {

@@ -20,7 +20,7 @@ export const authenticateUser = async (email, password) => {
             },
             `${process.env.JWT_KEY}`
         )
-        let result = await crypt.compare(password, user.password);
+        const result = await crypt.compare(password, user.password);
         if (result) {
             return token;
         }
