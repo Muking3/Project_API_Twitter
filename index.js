@@ -10,7 +10,7 @@ import cors from "cors"
 const app = express();
 const port = process.env.PORT;
 const corsOptions = {
-    origin: 'http://localhost:5174/Project_clone_Twitter/',
+    origin: 'http://localhost:5174',
     credentials: true,
     optionSuccessStatus: 200
 }
