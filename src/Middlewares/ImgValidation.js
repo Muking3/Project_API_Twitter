@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
     }
 })
 let tableRegex = /^image\/png$|^image\/jpe?g$|^image\/gif|^video\/mkv/;
-const maxSise = 5 * 1024 * 1024;
+const maxSise = 1 * 1024 * 1024;
 export const upload = multer({
     storage: storage,
     fileFilter: (req, file, cb) => {
@@ -24,4 +24,4 @@ export const upload = multer({
     },
     limits: { fileSize: maxSise }
 
-}).single("image");
+}).single("url");

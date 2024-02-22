@@ -4,11 +4,17 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 export const getAllUser = async (req, res) => {
-    const users = await prisma.user.findMany();
+    const users = await prisma.user.findMany({
+        include: { posts: true }
+    });
+    users.map(user => {
+        delete user.email
+        delete user.password
+    })
     return res.status(200).json(users);
 }
 
-export const getUser = async (req, res) => {
+export const getOneUser = async (req, res) => {
     const user = await prisma.user.findUnique({
         where: {
             id: req.params.id
@@ -31,7 +37,9 @@ export const postUser = async (req, res) => {
         data: {
             name: req.body.name,
             email: req.body.email,
-            password: hash
+            password: hash,
+            pseudo:req.body.pseudo,
+            url: `http://localhost:${process.env.PORT}/${req.file.filename}`,
         },
     });
     res.send(true);
