@@ -22,10 +22,10 @@ model Post {
 
 model User {
   id       String   @id @default(uuid())
-  name     String   @db.VarChar(15)
+  name     String   @db.VarChar(10)
   email    String   @unique
   password String   @db.VarChar(255)
-  pseudo   String?  @db.VarChar(8)
+  pseudo   String?  @db.VarChar(12)
   url      String
   posts    Post[]
   like     Like[]

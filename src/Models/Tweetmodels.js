@@ -23,11 +23,20 @@ export const Tweet = {
         }
     },
     getOneTweet: async (id) => {
-        await prisma.post.findUnique({
+        return await prisma.post.findUnique({
             where: {
                 id: id
             },
             include: { like: true }
+        });
+    },
+    postTweet: async (text, file, user) => {
+        return await prisma.post.create({
+            data: {
+                content: text,
+                url: `http://localhost:${process.env.PORT}/${file}`,
+                authorId: user,
+            },
         });
     }
 }

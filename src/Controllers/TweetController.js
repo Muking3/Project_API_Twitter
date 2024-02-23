@@ -42,6 +42,7 @@ export const getAllTweet = async (req, res) => {
 export const getOneTweet = async (req, res) => {
     try {
         const tweet = await Tweet.getOneTweet(req.params.id)
+        console.log(tweet);
         res.status(200).json(tweet);
     }
     catch (error) {
@@ -50,19 +51,32 @@ export const getOneTweet = async (req, res) => {
     }
 }
 
+// export const postTweet = async (req, res) => {
+//     const tweetBody = req.body.content.trim();
+//     if (tweetBody.length > 255)
+//         return res.send("nombre de text superiere a 255");
+//     await prisma.post.create({
+//         data: {
+//             content: tweetBody,
+//             url: `http://localhost:${process.env.PORT}/${req.file.filename}`,
+//             authorId: req.user,
+//         },
+//     });
+//     res.send("yes post");
+// }
+
 export const postTweet = async (req, res) => {
-    console.log(req);
     const tweetBody = req.body.content.trim();
-    if (tweetBody.length > 255)
-        return res.send("nombre de text superiere a 255");
-    await prisma.post.create({
-        data: {
-            content: tweetBody,
-            url: `http://localhost:${process.env.PORT}/${req.file.filename}`,
-            authorId: req.user,
-        },
-    });
-    res.send("yes post");
+    if (tweetBody.length > 100)
+        return res.status(400).send("La requête est incorrecte ou mal formée.");
+    try {
+        Tweet.postTweet(tweetBody, req.file.filename, req.user)
+        res.status(200).send(true);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Une erreur est survenue lors de la récupération des données." });
+    }
 }
 
 export const likeTweet = async (req, res) => {

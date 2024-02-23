@@ -4,7 +4,7 @@ const schema = Joi.object({
     name: Joi.string().min(3).max(15),
     email: Joi.string().email().required(),
     password: Joi.string().min(8).max(30).required(),
-    pseudo: Joi.string().max(8)
+    // pseudo: Joi.string().max(8)
 });
 
 export const AccountVerify = (req, res, next) => {
