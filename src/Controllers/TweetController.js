@@ -11,33 +11,7 @@ export const getAllTweet = async (req, res) => {
         console.error(error);
         res.status(500).json({ message: "Une erreur est survenue lors de la récupération des données." });
     }
-    // if (req.query.authorId) {
-    //     const TweetUser = await prisma.post.findMany({
-    //         where: {
-    //             authorId: req.query.authorId
-    //         },
-    //         include: { like: true }
-    //     });
-    //     return res.status(200).json(TweetUser);
-    // }
-    // const TweetUser = await prisma.post.findMany({
-    //     orderBy: {
-    //         createdAt: 'desc',
-    //     },
-    //     include: { like: true }
-    // });
-    // res.status(200).json(TweetUser);
 }
-
-// export const getOneTweet = async (req, res) => {
-//     const tweet = await prisma.post.findUnique({
-//         where: {
-//             id: req.params.id
-//         },
-//         include: { like: true }
-//     });
-//     res.status(200).json(tweet);
-// }
 
 export const getOneTweet = async (req, res) => {
     try {
@@ -50,20 +24,6 @@ export const getOneTweet = async (req, res) => {
         res.status(500).json({ message: "Une erreur est survenue lors de la récupération des données." });
     }
 }
-
-// export const postTweet = async (req, res) => {
-//     const tweetBody = req.body.content.trim();
-//     if (tweetBody.length > 255)
-//         return res.send("nombre de text superiere a 255");
-//     await prisma.post.create({
-//         data: {
-//             content: tweetBody,
-//             url: `http://localhost:${process.env.PORT}/${req.file.filename}`,
-//             authorId: req.user,
-//         },
-//     });
-//     res.send("yes post");
-// }
 
 export const postTweet = async (req, res) => {
     const tweetBody = req.body.content.trim();
@@ -129,10 +89,13 @@ export const repostTweet = async (req, res) => {
     return res.send("repost");
 };
 
-export const deleteTweet = (req, res) => {
-
-    // const newTweets = tweets.find((tweet) => req.body.id == tweet.id);
-    // const index = tweets.indexOf(newTweets);
-    // tweets.splice(index, 1);
-    return res.send("yes delete");
+export const deleteTweet = async (req, res) => {
+    try {
+        await Tweet.deleteTweet(req.params.id)
+        res.status(200).send(true);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Une erreur est survenue lors de la récupération des données." });
+    }
 };

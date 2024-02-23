@@ -18,7 +18,7 @@ export const Tweet = {
                 orderBy: {
                     createdAt: 'desc',
                 },
-                include: { like: true }
+                include: { like: true, author: true }
             });
         }
     },
@@ -36,6 +36,13 @@ export const Tweet = {
                 content: text,
                 url: `http://localhost:${process.env.PORT}/${file}`,
                 authorId: user,
+            },
+        });
+    },
+    deleteTweet: async (id) => {
+        return await prisma.post.delete({
+            where: {
+                id: id
             },
         });
     }
