@@ -7,6 +7,7 @@ import { user } from "./src/Routes/UserRoute.js";
 import passport from "passport";
 import { jwtStrategy } from './src/Middlewares/TokenValidation.js';
 import cors from "cors"
+
 const app = express();
 const port = process.env.PORT;
 const corsOptions = {
@@ -17,7 +18,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 // app.use(cors());
 app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
 
 const __filename = fileURLToPath(import.meta.url);

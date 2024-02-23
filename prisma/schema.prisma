@@ -11,21 +11,25 @@ model Post {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  content   String?  @db.VarChar(250)
+  content   String?  @db.VarChar(100)
   url       String?
   published Boolean  @default(false)
   author    User     @relation(fields: [authorId], references: [id])
   authorId  String
-  Like      Like[]
+  like      Like[]
+  repost    Repost[]
 }
 
 model User {
-  id       String  @id @default(uuid())
-  email    String  @unique
-  password String  @db.VarChar(255)
-  name     String?
+  id       String   @id @default(uuid())
+  name     String   @db.VarChar(10)
+  email    String   @unique
+  password String   @db.VarChar(255)
+  pseudo   String?  @db.VarChar(12)
+  url      String
   posts    Post[]
-  Like     Like[]
+  like     Like[]
+  repost   Repost[]
 }
 
 model Like {
@@ -33,8 +37,15 @@ model Like {
   postId   String
   author   User   @relation(fields: [authorId], references: [id])
   authorId String
-  // assignedAt DateTime @default(now())
-  // assignedBy String
+
+  @@id([postId, authorId])
+}
+
+model Repost {
+  post     Post   @relation(fields: [postId], references: [id])
+  postId   String
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId String
 
   @@id([postId, authorId])
 }

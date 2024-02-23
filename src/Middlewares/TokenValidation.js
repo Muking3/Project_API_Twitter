@@ -15,8 +15,10 @@ export const jwtStrategy = new Strategy(passportOptions, async (jwtPayload, done
         }
     });
     console.log(user);
-    if (!user) {
+    if (user === null) {
         done(new Error('User not found'), null);
-    };
-    done(null, user.id);
+    }
+    else {
+        done(null, user.id);
+    }
 });
