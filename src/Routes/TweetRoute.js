@@ -16,5 +16,5 @@ tweet.patch("", likeTweet);
 
 tweet.patch("", repostTweet);
 
-tweet.delete("", deleteTweet);
+tweet.delete("/:id", deleteTweet);
 
