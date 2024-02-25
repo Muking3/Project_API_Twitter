@@ -10,13 +10,7 @@ import cors from "cors"
 
 const app = express();
 const port = process.env.PORT;
-const corsOptions = {
-    origin: 'http://localhost:5174',
-    credentials: true,
-    optionSuccessStatus: 200
-}
-app.use(cors(corsOptions));
-// app.use(cors());
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
