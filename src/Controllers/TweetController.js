@@ -26,6 +26,7 @@ export const getOneTweet = async (req, res) => {
 }
 
 export const postTweet = async (req, res) => {
+    console.log(req);
     const tweetBody = req.body.content.trim();
     if (tweetBody.length > 100)
         return res.status(400).send("La requête est incorrecte ou mal formée.");
