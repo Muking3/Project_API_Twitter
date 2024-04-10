@@ -14,10 +14,10 @@ CREATE TABLE "Post" (
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
-    "name" VARCHAR(15) NOT NULL,
+    "name" VARCHAR(10) NOT NULL,
     "email" TEXT NOT NULL,
     "password" VARCHAR(255) NOT NULL,
-    "pseudo" VARCHAR(8),
+    "pseudo" VARCHAR(12),
     "url" TEXT NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
