@@ -1,9 +1,7 @@
 import crypt from "bcryptjs";
 import { authenticateUser } from '../Middlewares/AuthUser.js';
-import { PrismaClient } from '@prisma/client';
 import { User } from "../Models/Usermodels.js";
 
-const prisma = new PrismaClient();
 export const getAllUser = async (req, res) => {
     try {
         const users = await User.getAllUser()

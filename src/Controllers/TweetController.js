@@ -54,7 +54,7 @@ export const likeTweet = async (req, res) => {
                 authorId: likes[0].authorId
             }
         });
-        return res.send("DISlike");
+        return res.send("dislike");
     };
     await prisma.like.create({
         data: {
@@ -79,7 +79,7 @@ export const repostTweet = async (req, res) => {
                 authorId: reposts[0].authorId
             }
         });
-        return res.send("DISrepost");
+        return res.send("disrepost");
     };
     await prisma.repost.create({
         data: {
